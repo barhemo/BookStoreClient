@@ -32,8 +32,8 @@ export class SearchComponent implements OnInit {
     this.bookService.getAllBooks().pipe(first()).subscribe(booksWithQuantity => {
       this.booksWithQuantity = booksWithQuantity;
       this.filteredBooksWithQuantity = booksWithQuantity;
+      this.filterBooks();
     });
-    this.filterBooks();
   }
 
   filterByBookName(bookNameFilter: string): void {
