@@ -48,7 +48,8 @@ export class SearchComponent implements OnInit {
 
   filterBooks(): void {
     this.filteredBooksWithQuantity = this.booksWithQuantity.filter(bookWithQuantity =>
-      bookWithQuantity.book.author.includes(this.authorFilter) && bookWithQuantity.book.name.includes(this.bookNameFilter)
+      bookWithQuantity.book.author.toLowerCase().includes(this.authorFilter.toLowerCase())
+       && bookWithQuantity.book.name.toLowerCase().includes(this.bookNameFilter.toLowerCase())
     );
   }
 
