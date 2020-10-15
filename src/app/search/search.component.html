@@ -1,0 +1,51 @@
+<div class="p-5">
+    <h2>Books Store</h2>
+    <div *ngIf="successMessage" class="pb-3">
+        <div class="alert alert-success">{{successMessage}}</div>
+    </div>
+    <div class="row p-2 font-weight-bold">
+        Fill shipping address to buy book.
+    </div>
+    <div class="row p-2">
+        <div class="col-12">
+            <input type="text" [ngModel]="shippingAddress" (ngModelChange)="updateShippingAddress($event)"
+                class="form-control" placeholder="Shipping address">
+        </div>
+    </div>
+    <div class="row p-2 font-weight-bold">
+        Filter all books:
+    </div>
+    <div class="row p-2">
+        <div class="col-6">
+            <input type="text" [ngModel]="bookNameFilter" (ngModelChange)="filterByBookName($event)"
+                class="form-control" placeholder="Filter By Book Name">
+        </div>
+        <div class="col-6">
+            <input type="text" [ngModel]="authorFilter" (ngModelChange)="filterByAuthor($event)" class="form-control"
+                placeholder="Filter By Author">
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Book Name</th>
+                <th scope="col">Author</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Buy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bookWithQuantity of filteredBooksWithQuantity">
+                <td>{{bookWithQuantity.book.name}}</td>
+                <td>{{bookWithQuantity.book.author}}</td>
+                <td>{{bookWithQuantity.quantity}}</td>
+                <td>
+                    <button (click)="buyBook(bookWithQuantity.book)" [disabled]="shippingAddress.length === 0" class="btn btn-primary">Buy 🛒</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row font-weight-bold" *ngIf="filteredBooksWithQuantity.length === 0">
+        no books available
+    </div>
+</div>
